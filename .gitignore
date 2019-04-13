@@ -1,1 +1,6 @@
-# Created by .ignore support plugin (hsz.mobi)
+# Created by me
+build/
+gradle/
+out/
+.idea/
+*.iml
