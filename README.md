@@ -1,4 +1,4 @@
-# TodoMVC TornadoFX
+# TodoMVC TornadoFX.
 
 This is the TornadoFX take on the Todo MVC application.
 
