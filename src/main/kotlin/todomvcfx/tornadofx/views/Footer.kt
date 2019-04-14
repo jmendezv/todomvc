@@ -11,11 +11,11 @@ class Footer : View() {
 
     override val root = hbox {
         addClass(Styles.footer)
-        label(stringBinding(itemsLeft) { "$value item${value.plural} left" })
+        label(stringBinding(itemsLeft) { "${messages["tasques-pendents"]} $value item${value.plural}" })
         hbox {
             togglegroup {
                 for (state in FilterState.values())
-                    togglebutton(state.name).whenSelected { store.filterBy(state) }
+                    togglebutton(messages[state.name]).whenSelected { store.filterBy(state) }
             }
         }
     }
