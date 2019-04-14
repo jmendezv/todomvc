@@ -10,7 +10,7 @@ class Header : View() {
 
     override val root = vbox {
         addClass(Styles.header)
-        label("todos").setId(Styles.title)
+        label(messages["subtitol"]).setId(Styles.title)
         hbox {
             addClass(Styles.addItemRoot)
             checkbox {
@@ -20,10 +20,15 @@ class Header : View() {
                 allDone.onChange { isSelected = it }
             }
             textfield {
-                promptText = "What needs to be done?"
+                promptText = messages["que-cal-fer"]
                 action {
-                    store.addTodo(text)
-                    clear()
+                    text.apply {
+                        if (isNotBlank()) {
+                            store.addTodo(this.trim().capitalize())
+                            clear()
+                        }
+                    }
+
                 }
             }
         }
