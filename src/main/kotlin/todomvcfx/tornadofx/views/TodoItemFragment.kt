@@ -8,8 +8,8 @@ import todomvcfx.tornadofx.models.TodoItemModel
 import tornadofx.*
 
 class TodoItemFragment : ListCellFragment<TodoItem>() {
-    val store: Store by inject()
-    val todo = TodoItemModel(itemProperty)
+    val controller: Store by inject()
+    val model = TodoItemModel(itemProperty)
 
     override val root = hbox {
         // Enable if you want ellipsis instead of text overflow
@@ -18,20 +18,20 @@ class TodoItemFragment : ListCellFragment<TodoItem>() {
                 maxWidthProperty().cleanBind(cell.widthProperty().minus(15))
         }
         addClass(Styles.itemRoot)
-        checkbox(property = todo.completed) {
+        checkbox(property = model.completed) {
             action {
                 startEdit()
                 commitEdit(item)
             }
         }
-        label(todo.text) {
+        label(model.text) {
             setId(Styles.contentLabel)
             hgrow = Priority.ALWAYS
             useMaxSize = true
             removeWhen { editingProperty }
-            toggleClass(Styles.strikethrough, todo.completed)
+            toggleClass(Styles.strikethrough, model.completed)
         }
-        textfield(todo.text) {
+        textfield(model.text) {
             hgrow = Priority.ALWAYS
             removeWhen { editingProperty.not() }
             whenVisible { requestFocus() }
@@ -39,7 +39,7 @@ class TodoItemFragment : ListCellFragment<TodoItem>() {
         }
         button(graphic = Styles.closeIcon()) {
             removeWhen { parent.hoverProperty().not().or(editingProperty) }
-            action { store.removeTodo(item) }
+            action { controller.removeTodo(item) }
         }
     }
 
