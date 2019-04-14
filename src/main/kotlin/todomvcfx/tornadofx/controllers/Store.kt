@@ -7,7 +7,8 @@ import todomvcfx.tornadofx.models.TodoItem
 import tornadofx.*
 
 class Store : Controller() {
-    val todos = SortedFilteredList<TodoItem>()
+    val todos: SortedFilteredList<TodoItem>
+        get() = SortedFilteredList<TodoItem>()
 
     fun addTodo(text: String) = todos.add(TodoItem(text))
 
